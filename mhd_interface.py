@@ -4,7 +4,7 @@
 	Details: A MojoHelpDesk Interface for Python
 
 
-	Example Object:
+	Example Object passed to createTicket():
 	{
 		'company_id':
 		'custom_fields': {
@@ -30,7 +30,7 @@ class MHD():
 		self.apikey = apikey 
 
 	def createTicket(self, obj):
-		url = self.baseurl + "ticket"
+		url = self.baseurl + "tickets"
 
 		params = {
 			'access_key': self.apikey
@@ -57,23 +57,8 @@ class MHD():
 		print "Params: " + str(params)
 		print "Header: " + str(headers)
 		print "Data: " + ticket
-		#r = requests.post(url_ticket, params=params, headers=headers, data=ticket)
-		#print "MojoHelpDesk Returned This:"
-		#print r.text
+		r = requests.post(url, params=params, headers=headers, data=ticket)
+		print "URL SENT: " + r.url
+		print "----MojoHelpDesk Returned This:-----"
+		print r.text
 
-
-
-obj = {
-	'company_id': '123',
-	'custom_fields': {
-		'cus_clin':'123'
-	},
-	'description':'test',
-	'priority_id':'20',
-	'subject':'okwut',
-	'title':'hmm',
-	'user_id':'123'
-}
-
-test = MHD("hemtech.mojohelpdesk.com", "12345")
-test.createTicket(obj)
